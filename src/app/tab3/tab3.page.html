@@ -1,0 +1,464 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+ 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 3</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="ion-padding">
+
+    
+<div class="modal" *ngIf="isModalVisible">
+  <div class="modal-header">
+    <div class="modal-logo">
+      <span class="logo-circle">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          width="25"
+          height="25"
+          viewBox="0 0 512 419.116"
+        >
+          <defs>
+            <clipPath id="clip-folder-new">
+              <rect width="512" height="419.116"></rect>
+            </clipPath>
+          </defs>
+          <g id="folder-new" clip-path="url(#clip-folder-new)">
+            <path
+              id="Union_1"
+              data-name="Union 1"
+              d="M16.991,419.116A16.989,16.989,0,0,1,0,402.125V16.991A16.989,16.989,0,0,1,16.991,0H146.124a17,17,0,0,1,10.342,3.513L227.217,57.77H437.805A16.989,16.989,0,0,1,454.8,74.761v53.244h40.213A16.992,16.992,0,0,1,511.6,148.657L454.966,405.222a17,17,0,0,1-16.6,13.332H410.053v.562ZM63.06,384.573H424.722L473.86,161.988H112.2Z"
+              fill="var(--c-action-primary)"
+              stroke=""
+              stroke-width="1"
+            ></path>
+          </g>
+        </svg>
+      </span>
+    </div>
+    <button class="btn-close" (click)="toggleModal()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+      >
+        <path fill="none" d="M0 0h24v24H0V0z"></path>
+        <path
+          d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
+          fill="var(--c-text-secondary)"
+        ></path>
+      </svg>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p class="modal-title">Upload a file</p>
+    <p class="modal-description">Attach the file below</p>
+    <button class="upload-area">
+      <span class="upload-area-icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          width="35"
+          height="35"
+          viewBox="0 0 340.531 419.116"
+        >
+          <g id="files-new" clip-path="url(#clip-files-new)">
+            <path
+              id="Union_2"
+              data-name="Union 2"
+              d="M-2904.708-8.885A39.292,39.292,0,0,1-2944-48.177V-388.708A39.292,39.292,0,0,1-2904.708-428h209.558a13.1,13.1,0,0,1,9.3,3.8l78.584,78.584a13.1,13.1,0,0,1,3.8,9.3V-48.177a39.292,39.292,0,0,1-39.292,39.292Zm-13.1-379.823V-48.177a13.1,13.1,0,0,0,13.1,13.1h261.947a13.1,13.1,0,0,0,13.1-13.1V-323.221h-52.39a26.2,26.2,0,0,1-26.194-26.195v-52.39h-196.46A13.1,13.1,0,0,0-2917.805-388.708Zm146.5,241.621a14.269,14.269,0,0,1-7.883-12.758v-19.113h-68.841c-7.869,0-7.87-47.619,0-47.619h68.842v-18.8a14.271,14.271,0,0,1,7.882-12.758,14.239,14.239,0,0,1,14.925,1.354l57.019,42.764c.242.185.328.485.555.671a13.9,13.9,0,0,1,2.751,3.292,14.57,14.57,0,0,1,.984,1.454,14.114,14.114,0,0,1,1.411,5.987,14.006,14.006,0,0,1-1.411,5.973,14.653,14.653,0,0,1-.984,1.468,13.9,13.9,0,0,1-2.751,3.293c-.228.2-.313.485-.555.671l-57.019,42.764a14.26,14.26,0,0,1-8.558,2.847A14.326,14.326,0,0,1-2771.3-147.087Z"
+              transform="translate(2944 428)"
+              fill="var(--c-action-primary)"
+            ></path>
+          </g>
+        </svg>
+      </span>
+      <span class="upload-area-title">Drag file(s) here to upload.</span>
+      <span class="upload-area-description">
+        Alternatively, you can select a file by <br /><strong
+          >clicking here</strong
+        >
+      </span>
+    </button>
+  </div>
+  <div class="modal-footer">
+    <button class="btn-primary">Upload File</button>
+  </div>
+</div>
+
+    <div class="galaxy-button" *ngIf="!isAuthenticated">  <!-- Solo se muestra si no está autenticado -->
+      <button class="space-button" id="open-custom-dialog" (click)="openModal('register')">
+        <span class="backdrop"></span>
+        <span class="galaxy"></span>
+        <label class="text">Empezar</label>
+      </button>
+      <div class="bodydrop"></div>
+    </div>
+    
+    <!-- Modal -->
+    <ion-modal id="example-modal" #modal trigger="open-custom-dialog" 
+               (ionWillPresent)="onWillPresent()" (ionWillDismiss)="onWillDismiss()">
+      <ng-template>
+        <!-- Formulario Condicional -->
+        <form class="form" [formGroup]="isRegister ? formsReg : formLog" (ngSubmit)="isRegister ? Registro() : Logeo()">
+          <div class="form-title"><span>{{ isRegister ? 'Welcome user' : 'Welcome back' }}</span></div>
+          <div class="title-2"><span>{{ isRegister ? 'Sign in' : 'Log in' }}</span></div>
+          
+          <div class="input-container">
+            <input formControlName="email" class="input-mail" type="email" placeholder="Enter email">
+          </div>
+    
+          <section class="bg-stars">
+            <span class="star"></span>
+            <span class="star"></span>
+            <span class="star"></span>
+            <span class="star"></span>
+          </section>
+    
+          <div class="input-container">
+            <input formControlName="password" class="input-pwd" type="password" placeholder="Enter password">
+          </div>
+    
+          <button type="submit" class="submit">
+            <span class="sign-text">{{ isRegister ? 'Register' : 'Login' }}</span>
+          </button>
+    
+          <p class="signup-link">
+            {{ isRegister ? 'Already have an account?' : 'Don\'t have an account?' }}
+            <a href="javascript:void(0)"  (click)="toggleForm()">{{ isRegister ? 'Log in!' : 'Sign up!' }}</a>
+          </p>
+        </form>
+      </ng-template>
+    </ion-modal>
+    <!-- Success alert -->
+<div *ngIf="showSuccessAlert" class="success">
+  <div class="success__icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none">
+      <path fill-rule="evenodd" fill="#393a37" d="m12 1c-6.075 0-11 4.925-11 11s4.925 11 11 11 11-4.925 11-11-4.925-11-11-11zm4.768 9.14c.0878-.1004.1546-.21726.1966-.34383.0419-.12657.0581-.26026.0477-.39319-.0105-.13293-.0475-.26242-.1087-.38085-.0613-.11844-.1456-.22342-.2481-.30879-.1024-.08536-.2209-.14938-.3484-.18828s-.2616-.0519-.3942-.03823c-.1327.01366-.2612.05372-.3782.1178-.1169.06409-.2198.15091-.3027.25537l-4.3 5.159-2.225-2.226c-.1886-.1822-.4412-.283-.7034-.2807s-.51301.1075-.69842.2929-.29058.4362-.29285.6984c-.00228.2622.09851.5148.28067.7034l3 3c.0983.0982.2159.1748.3454.2251.1295.0502.2681.0729.4069.0665.1387-.0063.2747-.0414.3991-.1032.1244-.0617.2347-.1487.3236-.2554z" clip-rule="evenodd"></path>
+    </svg>
+  </div>
+  <div class="success__title">{{ successMessage }}</div>
+  <div class="success__close" (click)="closeSuccessAlert()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 20 20" height="20">
+      <path fill="#393a37" d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"></path>
+    </svg>
+  </div>
+</div>
+
+<!-- Error alert -->
+<div *ngIf="showErrorAlert" class="error">
+  <div class="error__icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none">
+      <path fill="#393a37" d="m13 13h-2v-6h2zm0 4h-2v-2h2zm-1-15c-1.3132 0-2.61358.25866-3.82683.7612-1.21326.50255-2.31565 1.23915-3.24424 2.16773-1.87536 1.87537-2.92893 4.41891-2.92893 7.07107 0 2.6522 1.05357 5.1957 2.92893 7.0711.92859.9286 2.03098 1.6651 3.24424 2.1677 1.21325.5025 2.51363.7612 3.82683.7612 2.6522 0 5.1957-1.0536 7.0711-2.9289 1.8753-1.8754 2.9289-4.4189 2.9289-7.0711 0-1.3132-.2587-2.61358-.7612-3.82683-.5026-1.21326-1.2391-2.31565-2.1677-3.24424-.9286-.92858-2.031-1.66518-3.2443-2.16773-1.2132-.50254-2.5136-.7612-3.8268-.7612z"></path>
+    </svg>
+  </div>
+  <div class="error__title">{{ errorMessage }}</div>
+  <div class="error__close" (click)="closeErrorAlert()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 20 20" height="20">
+      <path fill="#393a37" d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"></path>
+    </svg>
+  </div>
+</div>
+
+<!--carta donde estaran los datos del perfil-->
+
+<!-- <div class="card2">
+  <img
+    src="https://uiverse.io/build/_assets/astronaut-WTFWARES.png"
+    alt=""
+    class="image"
+  />
+  <div class="heading">We're on Social Media</div>
+  <div class="icons">
+    <a href="https://www.instagram.com/uiverse.io/" class="instagram">
+      <svg
+        width="24"
+        height="25"
+        viewBox="0 0 24 25"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M17.0459 7.5H17.0559M3.0459 12.5C3.0459 9.986 3.0459 8.73 3.3999 7.72C3.71249 6.82657 4.22237 6.01507 4.89167 5.34577C5.56096 4.67647 6.37247 4.16659 7.2659 3.854C8.2759 3.5 9.5329 3.5 12.0459 3.5C14.5599 3.5 15.8159 3.5 16.8269 3.854C17.7202 4.16648 18.5317 4.67621 19.201 5.34533C19.8702 6.01445 20.3802 6.82576 20.6929 7.719C21.0459 8.729 21.0459 9.986 21.0459 12.5C21.0459 15.014 21.0459 16.27 20.6929 17.28C20.3803 18.1734 19.8704 18.9849 19.2011 19.6542C18.5318 20.3235 17.7203 20.8334 16.8269 21.146C15.8169 21.5 14.5599 21.5 12.0469 21.5C9.5329 21.5 8.2759 21.5 7.2659 21.146C6.37268 20.8336 5.56131 20.324 4.89202 19.6551C4.22274 18.9862 3.71274 18.1751 3.3999 17.282C3.0459 16.272 3.0459 15.015 3.0459 12.501V12.5ZM15.8239 11.94C15.9033 12.4387 15.8829 12.9481 15.7641 13.4389C15.6453 13.9296 15.4304 14.392 15.1317 14.7991C14.833 15.2063 14.4566 15.5501 14.0242 15.8108C13.5917 16.0715 13.1119 16.2439 12.6124 16.318C12.1129 16.392 11.6037 16.3663 11.1142 16.2422C10.6248 16.1182 10.1648 15.8983 9.76082 15.5953C9.35688 15.2923 9.01703 14.9123 8.76095 14.4771C8.50486 14.0419 8.33762 13.5602 8.2689 13.06C8.13201 12.0635 8.39375 11.0533 8.99727 10.2487C9.6008 9.44407 10.4974 8.91002 11.4923 8.76252C12.4873 8.61503 13.5002 8.86599 14.3112 9.46091C15.1222 10.0558 15.6658 10.9467 15.8239 11.94Z"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></path>
+      </svg>
+    </a>
+    <a href="https://twitter.com/uiverse_io" class="x">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M19.8003 3L13.5823 10.105L19.9583 19.106C20.3923 19.719 20.6083 20.025 20.5983 20.28C20.594 20.3896 20.5657 20.4969 20.5154 20.5943C20.4651 20.6917 20.3941 20.777 20.3073 20.844C20.1043 21 19.7293 21 18.9793 21H17.2903C16.8353 21 16.6083 21 16.4003 20.939C16.2168 20.8847 16.0454 20.7957 15.8953 20.677C15.7253 20.544 15.5943 20.358 15.3313 19.987L10.6813 13.421L4.64033 4.894C4.20733 4.281 3.99033 3.975 4.00033 3.72C4.00478 3.61035 4.03323 3.50302 4.08368 3.40557C4.13414 3.30812 4.20536 3.22292 4.29233 3.156C4.49433 3 4.87033 3 5.62033 3H7.30833C7.76333 3 7.99033 3 8.19733 3.061C8.38119 3.1152 8.55295 3.20414 8.70333 3.323C8.87333 3.457 9.00433 3.642 9.26733 4.013L13.5833 10.105M4.05033 21L10.6823 13.421"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></path>
+      </svg>
+    </a>
+    <a href="https://discord.gg/KD8ba2uUpT" class="discord">
+      <svg
+        width="25"
+        height="25"
+        viewBox="0 0 25 25"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M11.5989 6.5003H14.2919C14.3851 6.5003 14.4764 6.47427 14.5555 6.42515C14.6347 6.37603 14.6985 6.30577 14.7399 6.2223L15.4179 4.8543C15.4664 4.75358 15.5488 4.67313 15.6506 4.62706C15.7524 4.58098 15.8673 4.57222 15.9749 4.6023C16.6309 4.7903 18.0049 5.2433 19.1029 6.0003C22.9669 8.8973 22.6069 15.3903 22.5779 16.7603C22.5765 16.8444 22.5541 16.9269 22.5129 17.0003C20.5299 20.5003 17.0899 20.5003 17.0899 20.5003L15.9239 18.0743M15.9239 18.0743C16.4479 17.9163 17.0029 17.7253 17.6029 17.5003M15.9239 18.0743C13.4799 18.8093 11.7219 18.8083 9.27791 18.0733M13.5989 6.5003H10.9109C10.8179 6.50039 10.7266 6.47451 10.6475 6.42557C10.5683 6.37664 10.5044 6.30659 10.4629 6.2233L9.77991 4.8533C9.73146 4.75279 9.64925 4.6725 9.54762 4.62644C9.446 4.58038 9.33142 4.57148 9.22391 4.6013C8.56891 4.7893 7.19291 5.2433 6.09391 6.0003C2.23091 8.8973 2.59091 15.3903 2.61991 16.7603C2.62132 16.8445 2.64366 16.9269 2.68491 17.0003C4.66791 20.5003 8.10791 20.5003 8.10791 20.5003L9.27791 18.0733M9.27791 18.0733C8.75491 17.9163 8.19891 17.7253 7.59891 17.5003M10.6009 12.5003C10.6009 12.7655 10.4956 13.0199 10.308 13.2074C10.1205 13.3949 9.86612 13.5003 9.60091 13.5003C9.33569 13.5003 9.08134 13.3949 8.8938 13.2074C8.70626 13.0199 8.60091 12.7655 8.60091 12.5003C8.60091 12.2351 8.70626 11.9807 8.8938 11.7932C9.08134 11.6057 9.33569 11.5003 9.60091 11.5003C9.86612 11.5003 10.1205 11.6057 10.308 11.7932C10.4956 11.9807 10.6009 12.2351 10.6009 12.5003ZM16.6029 12.5003C16.6029 12.7655 16.4976 13.0199 16.31 13.2074C16.1225 13.3949 15.8681 13.5003 15.6029 13.5003C15.3377 13.5003 15.0833 13.3949 14.8958 13.2074C14.7083 13.0199 14.6029 12.7655 14.6029 12.5003C14.6029 12.2351 14.7083 11.9807 14.8958 11.7932C15.0833 11.6057 15.3377 11.5003 15.6029 11.5003C15.8681 11.5003 16.1225 11.6057 16.31 11.7932C16.4976 11.9807 16.6029 12.2351 16.6029 12.5003Z"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></path>
+      </svg>
+    </a>
+  </div>
+</div> -->
+
+
+<!--creacion de perfil/edicion de perfil-->
+
+<div id="Container" *ngIf="isAuthenticated">
+  <form class="form2">
+    <div id="login-lable">Perfil Create</div>
+
+    <button (click)="toggleModal()">Perfil Picture</button>
+
+    <input class="form2-content" type="text" placeholder="UserName" />
+
+    <input class="form2-content" type="password" placeholder="PassWord" />
+    
+    <input class="form2-content" type="email" placeholder="Email" />
+
+    <input class="form2-content" type="password" placeholder="Confirm Password" />
+
+
+    <button>Create</button>
+  </form>
+
+  <div id="rays">
+    <svg
+      fill="none"
+      viewBox="0 0 299 152"
+      height="9em"
+      width="18em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill="url(#paint0_linear_8_3)"
+        d="M149.5 152H133.42L9.53674e-07 4.70132e-06H149.5L299 4.70132e-06L165.58 152H149.5Z"
+      ></path>
+      <defs>
+        <linearGradient
+          gradientUnits="userSpaceOnUse"
+          y2="12.1981"
+          x2="150.12"
+          y1="152"
+          x1="149.5"
+          id="paint0_linear_8_3"
+        >
+          <stop stop-color="#00E0FF"></stop>
+          <stop stop-opacity="0" stop-color="#65EDFF" offset="1"></stop>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <div id="emiter">
+    <svg
+      fill="none"
+      viewBox="0 0 160 61"
+      height="61"
+      width="160"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g filter="url(#filter0_di_1_38)">
+        <path
+          fill="#2B2B2B"
+          d="M80 27.9997C121.974 27.9997 156 22.4032 156 15.4996L156 40.4998C156 47.4034 121.974 52.9998 80 52.9998C38.0265 52.9998 4.00028 47.4034 4 40.4998V40.4998V15.51C4.0342 22.4089 38.0474 27.9997 80 27.9997Z"
+          clip-rule="evenodd"
+          fill-rule="evenodd"
+        ></path>
+      </g>
+      <ellipse
+        fill="url(#paint0_radial_1_38)"
+        ry="4.80773"
+        rx="28.3956"
+        cy="17.4236"
+        cx="80"
+      ></ellipse>
+      <g filter="url(#filter1_i_1_38)">
+        <path
+          fill="#323232"
+          d="M80 28.0002C121.974 28.0002 156 22.4037 156 15.5001C156 8.59648 121.974 3 80 3C38.0264 3 4 8.59648 4 15.5001C4 22.4037 38.0264 28.0002 80 28.0002ZM80.0001 20.308C96.1438 20.308 109.231 18.1555 109.231 15.5002C109.231 12.845 96.1438 10.6925 80.0001 10.6925C63.8564 10.6925 50.7693 12.845 50.7693 15.5002C50.7693 18.1555 63.8564 20.308 80.0001 20.308Z"
+          clip-rule="evenodd"
+          fill-rule="evenodd"
+        ></path>
+      </g>
+      <g filter="url(#filter2_di_1_38)">
+        <path
+          fill="#378BA6"
+          d="M106.725 17.4505C108.336 16.8543 109.231 16.1943 109.231 15.4999C109.231 12.8446 96.1438 10.6921 80.0001 10.6921C63.8564 10.6921 50.7693 12.8446 50.7693 15.4999C50.7693 16.1943 51.6645 16.8543 53.2752 17.4504C53.275 17.4414 53.2748 17.4323 53.2748 17.4232C53.2748 14.768 65.2401 12.6155 80.0001 12.6155C94.7601 12.6155 106.725 14.768 106.725 17.4232C106.725 17.4323 106.725 17.4414 106.725 17.4505Z"
+          clip-rule="evenodd"
+          fill-rule="evenodd"
+        ></path>
+      </g>
+      <defs>
+        <filter
+          color-interpolation-filters="sRGB"
+          filterUnits="userSpaceOnUse"
+          height="45.5002"
+          width="160"
+          y="15.4996"
+          x="0"
+          id="filter0_di_1_38"
+        >
+          <feFlood result="BackgroundImageFix" flood-opacity="0"></feFlood>
+          <feColorMatrix
+            result="hardAlpha"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            type="matrix"
+            in="SourceAlpha"
+          ></feColorMatrix>
+          <feOffset dy="4"></feOffset>
+          <feGaussianBlur stdDeviation="2"></feGaussianBlur>
+          <feComposite operator="out" in2="hardAlpha"></feComposite>
+          <feColorMatrix
+            values="0 0 0 0 0.620833 0 0 0 0 0.620833 0 0 0 0 0.620833 0 0 0 0.25 0"
+            type="matrix"
+          ></feColorMatrix>
+          <feBlend
+            result="effect1_dropShadow_1_38"
+            in2="BackgroundImageFix"
+            mode="normal"
+          ></feBlend>
+          <feBlend
+            result="shape"
+            in2="effect1_dropShadow_1_38"
+            in="SourceGraphic"
+            mode="normal"
+          ></feBlend>
+          <feColorMatrix
+            result="hardAlpha"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            type="matrix"
+            in="SourceAlpha"
+          ></feColorMatrix>
+          <feOffset></feOffset>
+          <feGaussianBlur stdDeviation="8"></feGaussianBlur>
+          <feComposite
+            k3="1"
+            k2="-1"
+            operator="arithmetic"
+            in2="hardAlpha"
+          ></feComposite>
+          <feColorMatrix
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0"
+            type="matrix"
+          ></feColorMatrix>
+          <feBlend
+            result="effect2_innerShadow_1_38"
+            in2="shape"
+            mode="normal"
+          ></feBlend>
+        </filter>
+        <filter
+          color-interpolation-filters="sRGB"
+          filterUnits="userSpaceOnUse"
+          height="25.0002"
+          width="152"
+          y="3"
+          x="4"
+          id="filter1_i_1_38"
+        >
+          <feFlood result="BackgroundImageFix" flood-opacity="0"></feFlood>
+          <feBlend
+            result="shape"
+            in2="BackgroundImageFix"
+            in="SourceGraphic"
+            mode="normal"
+          ></feBlend>
+          <feColorMatrix
+            result="hardAlpha"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            type="matrix"
+            in="SourceAlpha"
+          ></feColorMatrix>
+          <feMorphology
+            result="effect1_innerShadow_1_38"
+            in="SourceAlpha"
+            operator="erode"
+            radius="3"
+          ></feMorphology>
+          <feOffset dy="3"></feOffset>
+          <feGaussianBlur stdDeviation="3"></feGaussianBlur>
+          <feComposite operator="arithmetic" in2="SourceAlpha"></feComposite>
+          <feColorMatrix
+            values="0 0 0 0 0.429 0 0 0 0 0.218 0 0 0 0 0.213 0 0 0 0.47 0"
+            type="matrix"
+          ></feColorMatrix>
+          <feBlend
+            result="effect2_dropShadow_1_38"
+            in2="shape"
+            mode="normal"
+          ></feBlend>
+        </filter>
+        <filter
+          color-interpolation-filters="sRGB"
+          filterUnits="userSpaceOnUse"
+          height="5.0002"
+          width="152"
+          y="12"
+          x="4"
+          id="filter2_di_1_38"
+        >
+          <feFlood result="BackgroundImageFix" flood-opacity="0"></feFlood>
+          <feColorMatrix
+            result="hardAlpha"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            type="matrix"
+            in="SourceAlpha"
+          ></feColorMatrix>
+          <feOffset dy="1"></feOffset>
+          <feGaussianBlur stdDeviation="1"></feGaussianBlur>
+          <feComposite operator="in" in2="SourceAlpha"></feComposite>
+          <feColorMatrix
+            values="0 0 0 0 0.429 0 0 0 0 0.218 0 0 0 0 0.213 0 0 0 0.47 0"
+            type="matrix"
+          ></feColorMatrix>
+        </filter>
+        <radialGradient
+          cx="0"
+          cy="0"
+          r="1"
+          gradientUnits="userSpaceOnUse"
+          gradientTransform="translate(80 17.4236) rotate(90) scale(4.80773)"
+          id="paint0_radial_1_38"
+        >
+          <stop stop-opacity="0" stop-color="#61A8F7"></stop>
+          <stop stop-color="#24A8EC"></stop>
+        </radialGradient>
+      </defs>
+    </svg>
+  </div>
+</div>
+
+  </ion-content>
+</ion-content>

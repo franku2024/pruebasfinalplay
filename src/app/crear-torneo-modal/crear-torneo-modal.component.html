@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Crear Torneo</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Nombre del Torneo</ion-label>
+    <ion-input [(ngModel)]="nuevoTorneo.nombre" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Descripción</ion-label>
+    <ion-input [(ngModel)]="nuevoTorneo.descripcion" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Foto del Torneo URL</ion-label>
+    <ion-input [(ngModel)]="nuevoTorneo.fotoTorneoUrl" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Cantidad de Equipos</ion-label>
+    <ion-select [(ngModel)]="nuevoTorneo.cantidadEP" (ionChange)="actualizarEquipos()">
+      <ion-select-option value="4">4</ion-select-option>
+      <ion-select-option value="8">8</ion-select-option>
+      <ion-select-option value="16">16</ion-select-option>
+      <ion-select-option value="32">32</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- Mostrar los inputs de los equipos solo cuando la cantidad de equipos sea mayor que 0 -->
+  <div *ngIf="equipos.length > 0">
+    <ion-item *ngFor="let equipo of equipos; let i = index">
+      <ion-label>
+        <ion-input [(ngModel)]="equipo.nombre" placeholder="Nombre del equipo"></ion-input>
+        <ion-input [(ngModel)]="equipo.fotoEquipoUrl" placeholder="URL del logo"></ion-input>
+      </ion-label>
+      <ion-button (click)="eliminarEquipo(i)">Eliminar</ion-button>
+    </ion-item>
+  </div>
+
+  <ion-button expand="full" (click)="agregarEquipo()">Agregar Equipo</ion-button>
+
+  <ion-footer>
+    <ion-button expand="full" (click)="crearTorneo()">Crear Torneo</ion-button>
+    <ion-button expand="full" color="medium" (click)="cerrarModal()">Cancelar</ion-button>
+  </ion-footer>
+</ion-content>

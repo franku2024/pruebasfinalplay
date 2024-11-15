@@ -1,0 +1,7 @@
+{
+  "name": "finalplayapp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

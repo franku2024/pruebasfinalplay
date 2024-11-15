@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Crear Torneo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Crear Torneo</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Botón para abrir el modal -->
+  <ion-button expand="full" (click)="abrirModal()">Crear Torneo</ion-button>
+
+  <!-- Mostrar lista de torneos existentes -->
+  <ion-list>
+    <ion-item *ngFor="let torneo of torneos$ | async">
+      <ion-label>
+        <img src="{{torneo.fotoTorneoUrl}}" alt="Foto del Torneo">
+        <h2>{{ torneo.nombre }}</h2>
+        <p>{{ torneo.descripcion }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
